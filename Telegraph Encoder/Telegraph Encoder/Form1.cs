@@ -40,10 +40,21 @@ namespace Telegraph_Encoder
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             code.continueSimulation = false;//if is simulating, stop it immediately
+            textBox2.ForeColor = Color.Black;
+            textBox2.BackColor = Color.White;
 
             //Encode Immediately
-            code.encode(textBox1.Text);
-            textBox2.Text = code.ciphertext;
+            try
+            {
+                code.encode(textBox1.Text);
+                textBox2.Text = code.ciphertext;
+            }
+            catch(InvalidCharacterException ex)
+            {
+                textBox2.ForeColor = Color.Red;
+                textBox2.BackColor = Color.Black;
+                textBox2.Text = ex.Message;
+            }
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
