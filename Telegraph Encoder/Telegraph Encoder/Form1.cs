@@ -64,12 +64,11 @@ namespace Telegraph_Encoder
 
         private void button1_Click(object sender, EventArgs e)
         {
-            code.simulate();
+            SimulationForm simForm = new SimulationForm();
+            simForm.simCode = code;//transfer code
+            simForm.Show();
+            //Show a form that simulates and contains basic control
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            code.continueSimulation = false;//stop immediately
-        }
     }
 }

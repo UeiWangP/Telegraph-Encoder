@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Telegraph_Encoder
 {
-    class Code
+    public class Code
     {
-        private Dictionary<string, Dictionary<char, string>> codeRing= new Dictionary<string,Dictionary<char,string>>();//stores all codes
-        private Dictionary<char, string> currentCode=new Dictionary<char,string>();
+        public Dictionary<string, Dictionary<char, string>> codeRing= new Dictionary<string,Dictionary<char,string>>();//stores all codes
+        public Dictionary<char, string> currentCode=new Dictionary<char,string>();
         public string ciphertext;
-        public bool continueSimulation=true;
+        public bool continueSimulation;
 
         public void switchCode(string s)
         {
