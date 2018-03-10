@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Telegraph Encoder")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Encode and simulate telegraph from inputed text.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Uei Wang")]
 [assembly: AssemblyProduct("Telegraph Encoder")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Telegraph_Encoder
@@ -9,16 +10,16 @@ namespace Telegraph_Encoder
     class Code
     {
         private Dictionary<string, Dictionary<char, string>> codeRing= new Dictionary<string,Dictionary<char,string>>();//stores all codes
-        private Dictionary<char, string> currentCode;
-        private string ciphertext;
-        public bool isEncoded = false;//flags whether current text in TextBox1 has been encoded
+        private Dictionary<char, string> currentCode=new Dictionary<char,string>();
+        public string ciphertext;
+        public bool continueSimulation=true;
 
-        private void selectCode(string s)
+        public void switchCode(string s)
         {
             currentCode = codeRing[s];
         }
 
-        private void encode(string text)
+        public void encode(string text)
         {
             ciphertext = "";
             text.ToLower();//telegraph code is insensitive to capitalizing
@@ -35,7 +36,6 @@ namespace Telegraph_Encoder
                     throw new InvalidCharacterException(a);
                 }
             }
-            isEncoded = true;
         }
 
         public Code()
@@ -79,8 +79,47 @@ namespace Telegraph_Encoder
             currentCode.Add('8', "---..  ");
             currentCode.Add('9', "----.  ");
             currentCode.Add('0', "-----  ");
+            currentCode.Add(',', "--..--  ");
+            currentCode.Add('.', ".-.-.-  ");
+            currentCode.Add('?', "..--..  ");
+            currentCode.Add('\'', ".----.  ");
+            currentCode.Add('!', "-.-.--  ");
+            currentCode.Add('/', "-..-.  ");
+            currentCode.Add('(', "-.--.  ");
+            currentCode.Add(')', "-.--.-  ");
 
             codeRing.Add("Morse Code", currentCode);//add Morse Code to codeRing
+        }
+
+        public void simulate()
+        {
+            //Retrieve settings
+            int duration = Properties.Settings.Default.Duration;
+            int frequency = Properties.Settings.Default.Frequency;
+
+            continueSimulation = true;//start simulating
+
+            foreach(char a in ciphertext)
+            {
+                if (!continueSimulation)
+                    break;
+                //Stop immediately when asked
+
+                switch(a)
+                {
+                    case '.':
+                        Console.Beep(frequency,duration);
+                        break;
+                    case '-':
+                        Console.Beep(frequency, duration * 3);
+                        break;
+                    case ' ':
+                        Thread.Sleep(duration);
+                        break;
+                }
+                Thread.Sleep(duration);
+            }
+            //In accordance with the specification of Morse Code
         }
     }
 }
