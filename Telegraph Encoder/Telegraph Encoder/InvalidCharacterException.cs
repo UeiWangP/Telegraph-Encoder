@@ -8,7 +8,7 @@ namespace Telegraph_Encoder
 {
     class InvalidCharacterException:ApplicationException
     {
-        public InvalidCharacterException(char a):base("------Error------\nInvalid character "+a+" used!")
+        public InvalidCharacterException(char a):base("------ERROR------\r\nInvalid character "+a+" used!")
         { }
     }
 }

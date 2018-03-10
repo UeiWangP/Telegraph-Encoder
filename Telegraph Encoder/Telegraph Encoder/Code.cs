@@ -22,7 +22,7 @@ namespace Telegraph_Encoder
         public void encode(string text)
         {
             ciphertext = "";
-            text.ToLower();//telegraph code is insensitive to capitalizing
+            text = text.ToLower();//telegraph code is insensitive to capitalizing
 
             foreach(char a in text)
             {
