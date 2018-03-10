@@ -40,8 +40,6 @@ namespace Telegraph_Encoder
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             code.continueSimulation = false;//if is simulating, stop it immediately
-            textBox2.ForeColor = Color.Black;
-            textBox2.BackColor = Color.White;
 
             //Encode Immediately
             try
@@ -51,9 +49,9 @@ namespace Telegraph_Encoder
             }
             catch(InvalidCharacterException ex)
             {
-                textBox2.ForeColor = Color.Red;
-                textBox2.BackColor = Color.Black;
-                textBox2.Text = ex.Message;
+                //Show an error dialog
+                ErrorForm err = new ErrorForm(ex.Message);
+                err.Show();
             }
         }
 

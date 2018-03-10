@@ -127,9 +127,9 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(6, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 21);
+            this.label2.Size = new System.Drawing.Size(111, 21);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Frequency";
+            this.label2.Text = "Frequency/hz";
             // 
             // label1
             // 
@@ -204,7 +204,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Telegraph Encoder";
+            this.Text = "Telegraph Encoder v1.2";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
