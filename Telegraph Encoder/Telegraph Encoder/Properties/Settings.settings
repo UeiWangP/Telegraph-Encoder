@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="Duration" Description="Length of each signal" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">400</Value>
+      <Value Profile="(Default)">150</Value>
     </Setting>
     <Setting Name="Frequency" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">500</Value>
+      <Value Profile="(Default)">900</Value>
     </Setting>
   </Settings>
 </SettingsFile>

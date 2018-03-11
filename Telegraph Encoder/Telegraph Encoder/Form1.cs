@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telegraph_Encoder.Properties;
@@ -16,16 +17,16 @@ namespace Telegraph_Encoder
         public Form1()
         {
             InitializeComponent();
+
+            //Retrieve settings
+            textBox3.Text = Convert.ToString(Settings.Default.Duration);
+            textBox4.Text = Convert.ToString(Settings.Default.Frequency);
         }
 
         private Code code;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Retrieve settings
-            textBox3.Text = Convert.ToString(Settings.Default.Duration);
-            textBox4.Text = Convert.ToString(Settings.Default.Frequency);
-
             listBox1.SelectedItem = listBox1.Items[0];
             code = new Code();
         }
@@ -33,14 +34,15 @@ namespace Telegraph_Encoder
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             //Change and save duration settings
-            Settings.Default.Duration = Convert.ToInt32(textBox3.Text);
-            Settings.Default.Save();
+            try
+            {
+                Settings.Default.Duration = Convert.ToInt32(textBox3.Text);
+            }
+            catch (FormatException ex) { };
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            code.continueSimulation = false;//if is simulating, stop it immediately
-
             //Encode Immediately
             try
             {
@@ -58,8 +60,11 @@ namespace Telegraph_Encoder
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             //Change and save frequency settings
-            Settings.Default.Frequency = Convert.ToInt32(textBox3.Text);
-            Settings.Default.Save();
+            try
+            {
+                Settings.Default.Frequency = Convert.ToInt32(textBox4.Text);
+            }
+            catch (FormatException ex) { };
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -70,5 +75,9 @@ namespace Telegraph_Encoder
             //Show a form that simulates and contains basic control
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.Save(); //save settings
+        }
     }
 }
