@@ -9,10 +9,11 @@ namespace Telegraph_Encoder
 {
     public class Code
     {
-        public Dictionary<string, Dictionary<char, string>> codeRing= new Dictionary<string,Dictionary<char,string>>();//stores all codes
-        public Dictionary<char, string> currentCode=new Dictionary<char,string>();
+        private Dictionary<string, Dictionary<char, string>> codeRing= new Dictionary<string,Dictionary<char,string>>();//stores all codes
+        private Dictionary<char, string> currentCode=new Dictionary<char,string>();
         public string ciphertext;
         public bool continueSimulation;
+        public bool isFinished = false;
 
         public void switchCode(string s)
         {
@@ -97,7 +98,9 @@ namespace Telegraph_Encoder
             int duration = Properties.Settings.Default.Duration;
             int frequency = Properties.Settings.Default.Frequency;
 
-            continueSimulation = true;//start simulating
+            //Start simulating
+            continueSimulation = true;
+            isFinished = false;
 
             foreach(char a in ciphertext)
             {
@@ -120,6 +123,8 @@ namespace Telegraph_Encoder
                 Thread.Sleep(duration);
             }
             //In accordance with the specification of Morse Code
+
+            isFinished = true;//close SimulationForm
         }
     }
 }

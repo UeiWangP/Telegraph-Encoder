@@ -34,6 +34,22 @@ namespace Telegraph_Encoder
         {
             var thread = new Thread(() => simCode.simulate());
             thread.Start();
+
+            var threadCloseForm = new Thread(() => autoClose());
+            threadCloseForm.Start();
+        }
+
+        private void autoClose()
+        {
+            //A thread that closes SimulationForm as soon as simulation is finished
+            while (true)
+            {
+                if (simCode.isFinished)
+                {
+                    this.Close();
+                    break;
+                }
+            }
         }
     }
 }
