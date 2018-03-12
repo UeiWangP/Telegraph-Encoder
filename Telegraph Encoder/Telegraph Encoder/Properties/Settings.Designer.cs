@@ -30,9 +30,9 @@ namespace Telegraph_Encoder.Properties {
         [global::System.Configuration.SettingsDescriptionAttribute("Length of each signal")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("150")]
-        public int Duration {
+        public uint Duration {
             get {
-                return ((int)(this["Duration"]));
+                return ((uint)(this["Duration"]));
             }
             set {
                 this["Duration"] = value;
@@ -42,9 +42,9 @@ namespace Telegraph_Encoder.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int Frequency {
+        public uint Frequency {
             get {
-                return ((int)(this["Frequency"]));
+                return ((uint)(this["Frequency"]));
             }
             set {
                 this["Frequency"] = value;

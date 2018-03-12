@@ -12,6 +12,8 @@ namespace Telegraph_Encoder
         private Dictionary<string, Dictionary<char, string>> codeRing= new Dictionary<string,Dictionary<char,string>>();//stores all codes
         private Dictionary<char, string> currentCode=new Dictionary<char,string>();
         public string ciphertext;
+
+        //For interaction between threads
         public bool continueSimulation;
         public bool isFinished = false;
 
@@ -95,8 +97,8 @@ namespace Telegraph_Encoder
         public void simulate()
         {
             //Retrieve settings
-            int duration = Properties.Settings.Default.Duration;
-            int frequency = Properties.Settings.Default.Frequency;
+            uint duration = Properties.Settings.Default.Duration;
+            uint frequency = Properties.Settings.Default.Frequency;
 
             //Start simulating
             continueSimulation = true;
@@ -111,16 +113,16 @@ namespace Telegraph_Encoder
                 switch(a)
                 {
                     case '.':
-                        Console.Beep(frequency,duration);
+                        Console.Beep((int)frequency,(int)duration);
                         break;
                     case '-':
-                        Console.Beep(frequency, duration * 3);
+                        Console.Beep((int)frequency, (int)duration * 3);
                         break;
                     case ' ':
-                        Thread.Sleep(duration);
+                        Thread.Sleep((int)duration);
                         break;
                 }
-                Thread.Sleep(duration);
+                Thread.Sleep((int)duration);
             }
             //In accordance with the specification of Morse Code
 

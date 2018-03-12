@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Telegraph_Encoder.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Duration" Description="Length of each signal" Type="System.Int32" Scope="User">
+    <Setting Name="Duration" Description="Length of each signal" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">150</Value>
     </Setting>
-    <Setting Name="Frequency" Type="System.Int32" Scope="User">
+    <Setting Name="Frequency" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">900</Value>
     </Setting>
   </Settings>
