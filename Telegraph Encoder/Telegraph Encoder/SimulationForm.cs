@@ -13,7 +13,7 @@ namespace Telegraph_Encoder
 {
     public partial class SimulationForm : Form
     {
-        public Code simCode { get; set; }
+        public Code SimCode { get; set; }
         public SimulationForm()
         {
             InitializeComponent();
@@ -21,18 +21,18 @@ namespace Telegraph_Encoder
 
         private void SimulationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            simCode.continueSimulation = false;//terminate the thread
+            SimCode.ContinueSimulation = false;//terminate the thread
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            simCode.continueSimulation = false;//stop simulation
+            SimCode.ContinueSimulation = false;//stop simulation
             this.Close();
         }
 
         private void SimulationForm_Load(object sender, EventArgs e)
         {
-            var thread = new Thread(() => simCode.simulate());
+            var thread = new Thread(() => SimCode.Simulate());
             thread.Start();
 
             var threadCloseForm = new Thread(() => autoClose());
@@ -44,7 +44,7 @@ namespace Telegraph_Encoder
             //A thread that closes SimulationForm as soon as simulation is finished
             while (true)
             {
-                if (simCode.isFinished)
+                if (SimCode.IsFinished)
                 {
                     this.Close();
                     break;

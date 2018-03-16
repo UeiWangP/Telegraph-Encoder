@@ -47,8 +47,8 @@ namespace Telegraph_Encoder
             //Encode Immediately
             try
             {
-                code.encode(textBox1.Text);
-                textBox2.Text = code.ciphertext;
+                code.Encode(textBox1.Text);
+                textBox2.Text = code.Ciphertext;
             }
             catch(InvalidCharacterException ex)
             {
@@ -74,7 +74,7 @@ namespace Telegraph_Encoder
             if (checkValidity_f(textBox4.Text))
             {
                 SimulationForm simForm = new SimulationForm();
-                simForm.simCode = code;//transfer code
+                simForm.SimCode = code;//transfer code
                 simForm.Show();
                 //Show a form that simulates and contains basic control
             }
