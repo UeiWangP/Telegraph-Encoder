@@ -30,11 +30,26 @@ namespace Telegraph_Encoder
             this.Close();
         }
 
-        async private Task simulateAsync()
+        private void SimulationForm_Load(object sender, EventArgs e)
         {
-            await SimCode.SimulateAsync();
+            var thread = new Thread(() => SimCode.Simulate());
+            thread.Start();
 
-            this.Close();
+            var threadCloseForm = new Thread(() => autoClose());
+            threadCloseForm.Start();
+        }
+
+        private void autoClose()
+        {
+            //A thread that closes SimulationForm as soon as simulation is finished
+            while (true)
+            {
+                if (SimCode.IsFinished)
+                {
+                    this.Close();
+                    break;
+                }
+            }
         }
     }
 }

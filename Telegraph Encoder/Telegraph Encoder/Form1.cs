@@ -40,8 +40,6 @@ namespace Telegraph_Encoder
                 ParameterRangeForm rangeForm = new ParameterRangeForm(true);
                 rangeForm.Show();
             }
-
-            Settings.Default.Save();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -63,14 +61,12 @@ namespace Telegraph_Encoder
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             if (checkValidity_d(textBox4.Text))
-                Settings.Default.Frequency = Convert.ToUInt32(textBox3.Text);
+                Settings.Default.Duration = Convert.ToUInt32(textBox3.Text);
             else if (textBox4.Text != "")//when a user is changing textBox3.Text, he or she may first delete all numbers and then type a new one
             {
                 ParameterRangeForm rangeForm = new ParameterRangeForm(false);
                 rangeForm.Show();
             }
-
-            Settings.Default.Save();
         }
 
         private void button1_Click(object sender, EventArgs e)

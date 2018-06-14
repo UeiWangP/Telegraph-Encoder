@@ -51,6 +51,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Simultating....";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimulationForm_FormClosing);
+            this.Load += new System.EventHandler(this.SimulationForm_Load);
             this.ResumeLayout(false);
 
         }

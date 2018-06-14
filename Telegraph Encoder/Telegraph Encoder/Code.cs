@@ -15,6 +15,7 @@ namespace Telegraph_Encoder
 
         //For interaction between threads
         public bool ContinueSimulation;
+        public bool IsFinished = false;
 
         public void SwitchCode(string s)
         {
@@ -93,7 +94,7 @@ namespace Telegraph_Encoder
             codeRing.Add("Morse Code", currentCode);//add Morse Code to codeRing
         }
 
-        async public Task SimulateAsync()
+        public void Simulate()
         {
             //Retrieve settings
             uint duration = Properties.Settings.Default.Duration;
@@ -101,6 +102,7 @@ namespace Telegraph_Encoder
 
             //Start simulating
             ContinueSimulation = true;
+            IsFinished = false;
 
             foreach(char a in Ciphertext)
             {
@@ -123,6 +125,8 @@ namespace Telegraph_Encoder
                 Thread.Sleep((int)duration);
             }
             //In accordance with the specification of Morse Code
+
+            IsFinished = true;//close SimulationForm
         }
     }
 }
