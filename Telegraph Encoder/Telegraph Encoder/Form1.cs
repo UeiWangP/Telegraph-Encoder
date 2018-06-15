@@ -115,5 +115,22 @@ namespace Telegraph_Encoder
                 return true;
             else return false;
         }
+
+        private void simulateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            button1_Click(sender, e);
+        }
+
+        private void clearSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Restore settings
+            textBox3.Text = "150";
+            textBox4.Text = "900";
+        }
     }
 }
