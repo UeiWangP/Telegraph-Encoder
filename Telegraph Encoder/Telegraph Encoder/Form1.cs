@@ -33,12 +33,13 @@ namespace Telegraph_Encoder
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            //Change and save duration settings
-            try
+            if (checkValidity_d(textBox3.Text))//the value is valid
+                Settings.Default.Duration = Convert.ToUInt32(textBox3.Text);
+            else if (textBox3.Text!="")//when a user is changing textBox3.Text, he or she may first delete all numbers and then type a new one
             {
-                Settings.Default.Duration = Convert.ToInt32(textBox3.Text);
+                ParameterRangeForm rangeForm = new ParameterRangeForm(true);
+                rangeForm.Show();
             }
-            catch (FormatException ex) { };
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -46,8 +47,8 @@ namespace Telegraph_Encoder
             //Encode Immediately
             try
             {
-                code.encode(textBox1.Text);
-                textBox2.Text = code.ciphertext;
+                code.Encode(textBox1.Text);
+                textBox2.Text = code.Ciphertext;
             }
             catch(InvalidCharacterException ex)
             {
@@ -59,25 +60,60 @@ namespace Telegraph_Encoder
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            //Change and save frequency settings
-            try
+            if (checkValidity_d(textBox4.Text))
+                Settings.Default.Duration = Convert.ToUInt32(textBox3.Text);
+            else if (textBox4.Text != "")//when a user is changing textBox3.Text, he or she may first delete all numbers and then type a new one
             {
-                Settings.Default.Frequency = Convert.ToInt32(textBox4.Text);
+                ParameterRangeForm rangeForm = new ParameterRangeForm(false);
+                rangeForm.Show();
             }
-            catch (FormatException ex) { };
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SimulationForm simForm = new SimulationForm();
-            simForm.simCode = code;//transfer code
-            simForm.Show();
-            //Show a form that simulates and contains basic control
+            if (checkValidity_f(textBox4.Text))
+            {
+                SimulationForm simForm = new SimulationForm();
+                simForm.SimCode = code;//transfer code
+                simForm.Show();
+                //Show a form that simulates and contains basic control
+            }
+            else
+            {
+                ParameterRangeForm rangeForm = new ParameterRangeForm(false);
+                rangeForm.Show();
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.Save(); //save settings
+        }
+
+        //Pre-emptive check for if variable duration in Code.simulation() would cause exceptio in Console.Beep(int,int)
+        private bool checkValidity_d(string s)
+        {
+            //Check if s is an unsigned interger
+            try
+            {
+                Convert.ToUInt32(s);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        //Because when a user is changing textBox3.Text, he or she may first delete all numbers and then type a new one,
+        //and within this process textBox3.Text would temporally be smaller than 37,
+        //this check is run before simulation
+        private bool checkValidity_f(string s)
+        {
+            uint i = Convert.ToUInt32(s);
+            if (i >= 37u && i <= 32767u)//the range of frequency in Console.Beep(frequency,duration)
+                return true;
+            else return false;
         }
     }
 }

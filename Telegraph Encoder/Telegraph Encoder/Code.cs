@@ -11,25 +11,27 @@ namespace Telegraph_Encoder
     {
         private Dictionary<string, Dictionary<char, string>> codeRing= new Dictionary<string,Dictionary<char,string>>();//stores all codes
         private Dictionary<char, string> currentCode=new Dictionary<char,string>();
-        public string ciphertext;
-        public bool continueSimulation;
-        public bool isFinished = false;
+        public string Ciphertext;
 
-        public void switchCode(string s)
+        //For interaction between threads
+        public bool ContinueSimulation;
+        public bool IsFinished = false;
+
+        public void SwitchCode(string s)
         {
             currentCode = codeRing[s];
         }
 
-        public void encode(string text)
+        public void Encode(string text)
         {
-            ciphertext = "";
+            Ciphertext = "";
             text = text.ToLower();//telegraph code is insensitive to capitalizing
 
             foreach(char a in text)
             {
                 try
                 {
-                    ciphertext += currentCode[a];
+                    Ciphertext += currentCode[a];
                 }
                 //if an invalid character is used, throw an exception to Form1
                 catch(KeyNotFoundException)
@@ -92,39 +94,39 @@ namespace Telegraph_Encoder
             codeRing.Add("Morse Code", currentCode);//add Morse Code to codeRing
         }
 
-        public void simulate()
+        public void Simulate()
         {
             //Retrieve settings
-            int duration = Properties.Settings.Default.Duration;
-            int frequency = Properties.Settings.Default.Frequency;
+            uint duration = Properties.Settings.Default.Duration;
+            uint frequency = Properties.Settings.Default.Frequency;
 
             //Start simulating
-            continueSimulation = true;
-            isFinished = false;
+            ContinueSimulation = true;
+            IsFinished = false;
 
-            foreach(char a in ciphertext)
+            foreach(char a in Ciphertext)
             {
-                if (!continueSimulation)
+                if (!ContinueSimulation)
                     break;
                 //Stop immediately when asked
 
                 switch(a)
                 {
                     case '.':
-                        Console.Beep(frequency,duration);
+                        Console.Beep((int)frequency,(int)duration);
                         break;
                     case '-':
-                        Console.Beep(frequency, duration * 3);
+                        Console.Beep((int)frequency, (int)duration * 3);
                         break;
                     case ' ':
-                        Thread.Sleep(duration);
+                        Thread.Sleep((int)duration);
                         break;
                 }
-                Thread.Sleep(duration);
+                Thread.Sleep((int)duration);
             }
             //In accordance with the specification of Morse Code
 
-            isFinished = true;//close SimulationForm
+            IsFinished = true;//close SimulationForm
         }
     }
 }
